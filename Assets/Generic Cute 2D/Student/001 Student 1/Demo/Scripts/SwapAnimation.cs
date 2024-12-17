@@ -20,7 +20,7 @@ public class SwapAnimation : MonoBehaviour
             animators[i] = characters[i].GetComponent<Animator>();
         }
         */
-        animationNameText.text = characters[0].runtimeAnimatorController.animationClips[animationIndex].name;
+        //animationNameText.text = characters[0].runtimeAnimatorController.animationClips[animationIndex].name;
     }
 
     // Update is called once per frame
