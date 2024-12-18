@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PunteCollider : MonoBehaviour
+public class PuenteCollider : MonoBehaviour
 {
     [Header("GameObjects to Deactivate")]
     public GameObject gameObject1; // Primer GameObject a desactivar

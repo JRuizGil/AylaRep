@@ -4,13 +4,11 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
-    // Referencia al objeto que la cámara debe seguir (generalmente el jugador)
+        // Referencia al objeto que la cámara debe seguir (generalmente el jugador)
     public Transform player;
-
-    // Offset para mantener la cámara a una distancia específica del jugador
+        // Offset para mantener la cámara a una distancia específica del jugador
     public Vector3 offset;
-
-    // Velocidad de suavizado para que el movimiento sea más fluido
+        // Velocidad de suavizado para que el movimiento sea más fluido
     public float smoothSpeed = 0.125f;
 
     void LateUpdate()
@@ -30,5 +28,6 @@ public class CameraFollow : MonoBehaviour
             // transform.LookAt(player);
         }
     }
+    
 }
 
