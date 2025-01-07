@@ -4,6 +4,7 @@ using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
+    public Animator animator;
     public float speed = 5f;
     public float jumpForce = 10f;
     public float dashDistance = 5f;
@@ -25,7 +26,6 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-
     }
 
     void Update()
@@ -100,15 +100,6 @@ public class PlayerController : MonoBehaviour
             {
                 // Si el menú está inactivo, actívalo y verifica el doble clic
                 menu.SetActive(true);
-
-                // Detecta si Escape se ha presionado dos veces para salir
-                if (Time.time - lastEscapePressTime < doublePressThreshold)
-                {
-                    ExitGame();
-                }
-
-                // Actualiza el tiempo de la última pulsación de Escape
-                lastEscapePressTime = Time.time;
             }
         }
     }
