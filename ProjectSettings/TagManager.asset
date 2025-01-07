@@ -7,6 +7,8 @@ TagManager:
   - Ground
   - platform
   - Demolition
+  - Bola
+  - Bullet
   layers:
   - Default
   - TransparentFX
@@ -46,4 +48,7 @@ TagManager:
     locked: 0
   - name: Tronco
     uniqueID: 1315535579
+    locked: 0
+  - name: Bullet
+    uniqueID: 1982119017
     locked: 0

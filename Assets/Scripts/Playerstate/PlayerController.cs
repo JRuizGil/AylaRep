@@ -20,8 +20,6 @@ public class PlayerController : MonoBehaviour
     public float groundCheckRadius = 0.2f;
     private float lastDashTime;
     private int jumpCount; // Contador de saltos
-    private float lastEscapePressTime = 0f;   // Momento en que se presionó Escape por última vez
-    private float doublePressThreshold = 0.5f; // Tiempo en segundos permitido entre dos presiones (ajustable)
 
     void Start()
     {

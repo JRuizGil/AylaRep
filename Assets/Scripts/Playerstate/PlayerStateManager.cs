@@ -7,7 +7,7 @@ public class PlayerStateManager : MonoBehaviour
     PlayerBaseState currentState;
     public PlayerStartingState StartingState = new PlayerStartingState();
     public PlayerPyroState PyroState = new PlayerPyroState();
-    
+    public PlayerPuenteState PuenteState = new PlayerPuenteState();
 
     void Start()
     {
