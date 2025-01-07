@@ -14,16 +14,21 @@ public class PlayerController : MonoBehaviour
     public LayerMask groundLayer;
     public LayerMask obstacleLayer;
     public GameObject menu;
+    public GameObject Player;
     private Rigidbody2D rb;
     private bool isGrounded;
     private bool isFacingRight = true;
     public float groundCheckRadius = 0.2f;
     private float lastDashTime;
     private int jumpCount; // Contador de saltos
+    public Vector2 startPosition;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        startPosition = transform.position;
+        Player.SetActive(false);
+        menu.SetActive(true);
     }
 
     void Update()
@@ -93,11 +98,13 @@ public class PlayerController : MonoBehaviour
             if (menu.activeSelf)
             {
                 menu.SetActive(false);
+                Player.SetActive(true);
             }
             else
             {
-                // Si el menú está inactivo, actívalo y verifica el doble clic
+                
                 menu.SetActive(true);
+                Player.SetActive(false);
             }
         }
     }
@@ -123,6 +130,16 @@ public class PlayerController : MonoBehaviour
 #else
             Application.Quit(); // Para builds finales
 #endif
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        // Verificamos si el objeto con el que chocamos tiene el tag "Pinchos"
+        if (collision.gameObject.CompareTag("Pinchos"))
+        {
+            // Si es así, volvemos a la posición inicial
+            transform.position = startPosition;
+            Debug.Log("Jugador colisionó con Pinchos y volvió a la posición inicial.");
+        }
     }
 
 }
