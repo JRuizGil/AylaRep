@@ -170,7 +170,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameObject1: {fileID: 40049831}
-  gameObject2: {fileID: 0}
+  gameObject2: {fileID: 1977926855}
 --- !u!61 &40049834
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1410,9 +1410,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 122558662}
   serializedVersion: 2
+<<<<<<< HEAD
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.06, y: -0.07680035, z: 0}
+  m_LocalScale: {x: 0.61993, y: 0.61993, z: 0.61993}
+=======
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -3.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+>>>>>>> origin/main
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1817833555}
@@ -11263,7 +11269,7 @@ PolygonCollider2D:
       - {x: -662.55963, y: -101.16495}
       - {x: -690.37823, y: -96.531235}
       - {x: -693.5777, y: -96}
-  m_UseDelaunayMesh: 0
+  m_UseDelaunayMesh: 1
 --- !u!1001 &321338898
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14289,7 +14295,7 @@ GameObject:
   - component: {fileID: 895376098}
   - component: {fileID: 895376097}
   - component: {fileID: 895376096}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: env_rock_14
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -22838,7 +22844,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7066146461792856488, guid: 67290c5d6aebf07448d0e3d021dd947e, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7066146461792856488, guid: 67290c5d6aebf07448d0e3d021dd947e, type: 3}
       propertyPath: m_SortingOrder
@@ -22963,6 +22969,10 @@ PrefabInstance:
     - target: {fileID: 7066146461792856490, guid: 67290c5d6aebf07448d0e3d021dd947e, type: 3}
       propertyPath: m_Name
       value: Forest ground BACK
+      objectReference: {fileID: 0}
+    - target: {fileID: 7066146461792856490, guid: 67290c5d6aebf07448d0e3d021dd947e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7066146461792856491, guid: 67290c5d6aebf07448d0e3d021dd947e, type: 3}
       propertyPath: m_Creator
@@ -24251,6 +24261,86 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
+<<<<<<< Updated upstream
+<<<<<<< HEAD
+  m_Offset: {x: -0.09283764, y: 1.5788864}
+  m_Size: {x: 1.0575385, y: 3.2511578}
+=======
+  m_Offset: {x: -0.09283764, y: 1.5550684}
+  m_Size: {x: 1.0575385, y: 3.2987938}
+>>>>>>> Stashed changes
+  m_Direction: 0
+--- !u!114 &1370057690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1370057680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d080c1353e1ad134c921fcf40f1f75e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Pyro: 0
+  Bola: 0
+  Palo: 0
+  Puente: 0
+  Paloobj: {fileID: 0}
+  Player: {fileID: 1370057680}
+  bulletPrefab: {fileID: 1193380156515536203, guid: 2939046a5dfac2149bb3f6add2073cb3, type: 3}
+  firePoint: {fileID: 156329745}
+  bulletSpeed: 20
+--- !u!114 &1370057691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1370057680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: babf5b0d12dfd2343890d449bcb985ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Pyro: 0
+  Bola: 0
+  Palo: 0
+  Puente: 0
+--- !u!114 &1370057692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1370057680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01895d8308a94484ca50969c37b0ba68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartingState: {fileID: 1370057693}
+  PyroState: {fileID: 1370057690}
+  PuenteState: {fileID: 1370057691}
+--- !u!114 &1370057693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1370057680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5709b65240135f4da7012bc9c80c279, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Pyro: 0
+  Bola: 0
+  Palo: 0
+  Puente: 0
+  Bolaobj: {fileID: 1815648818}
+  Player: {fileID: 1370057680}
+=======
   m_Offset: {x: 0, y: -0.20383513}
   m_SpriteTilingProperty:
     border: {x: 1.38, y: 0, z: 1.38, w: 0}
@@ -24264,6 +24354,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 5.9866667, y: 1.3056631}
   m_EdgeRadius: 0
+>>>>>>> origin/main
 --- !u!1 &1377939734
 GameObject:
   m_ObjectHideFlags: 0
@@ -24473,7 +24564,7 @@ PolygonCollider2D:
       - {x: -6.0912952, y: -44.333027}
       - {x: -10.13488, y: -31.0793}
       - {x: -11.875178, y: 4.1446953}
-  m_UseDelaunayMesh: 0
+  m_UseDelaunayMesh: 1
 --- !u!1001 &1409285557
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27009,8 +27100,17 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1740532374}
   serializedVersion: 2
+<<<<<<< HEAD
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+<<<<<<< Updated upstream
+  m_LocalPosition: {x: 134.91953, y: -136, z: 0}
+=======
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 99.77286, y: -142, z: 0.5989623}
+>>>>>>> origin/main
+=======
+  m_LocalPosition: {x: 134.91953, y: -166.05342, z: 0}
+>>>>>>> Stashed changes
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -28626,7 +28726,7 @@ GameObject:
   - component: {fileID: 2038870066}
   - component: {fileID: 2038870065}
   - component: {fileID: 2038870067}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: env_rock_15
   m_TagString: Ground
   m_Icon: {fileID: 0}
