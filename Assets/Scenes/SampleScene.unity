@@ -1412,7 +1412,7 @@ Transform:
   serializedVersion: 2
 <<<<<<< HEAD
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.084, y: -0.1, z: 0}
+  m_LocalPosition: {x: -0.06, y: -0.07680035, z: 0}
   m_LocalScale: {x: 0.61993, y: 0.61993, z: 0.61993}
 =======
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -24261,9 +24261,14 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
+<<<<<<< Updated upstream
 <<<<<<< HEAD
   m_Offset: {x: -0.09283764, y: 1.5788864}
   m_Size: {x: 1.0575385, y: 3.2511578}
+=======
+  m_Offset: {x: -0.09283764, y: 1.5550684}
+  m_Size: {x: 1.0575385, y: 3.2987938}
+>>>>>>> Stashed changes
   m_Direction: 0
 --- !u!114 &1370057690
 MonoBehaviour:
@@ -27097,11 +27102,15 @@ Transform:
   serializedVersion: 2
 <<<<<<< HEAD
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+<<<<<<< Updated upstream
   m_LocalPosition: {x: 134.91953, y: -136, z: 0}
 =======
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 99.77286, y: -142, z: 0.5989623}
 >>>>>>> origin/main
+=======
+  m_LocalPosition: {x: 134.91953, y: -166.05342, z: 0}
+>>>>>>> Stashed changes
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
