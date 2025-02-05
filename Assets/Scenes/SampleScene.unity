@@ -27693,20 +27693,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
   speed: 15
-  jumpForce: 20
   dashDistance: 10
   dashCooldown: 1
   maxJumps: 1
+  menu: {fileID: 1210780121}
+  Player: {fileID: 1817833546}
+  groundCheckRadius: 0.2
   groundCheck: {fileID: 122558663}
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
+  jumpForce: 16
+  jumpMultiplier: 0
+  fallMultiplier: 0
+  jumptime: 0
+  isJumping: 0
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 64
-  menu: {fileID: 1210780121}
-  Player: {fileID: 1817833546}
-  groundCheckRadius: 0.2
   startPosition: {x: 0, y: 0}
 --- !u!212 &1817833554
 SpriteRenderer:

@@ -6,21 +6,31 @@ public class PlayerController : MonoBehaviour
 {
     public Animator animator;
     public float speed = 5f;
-    public float jumpForce = 10f;
+    
     public float dashDistance = 5f;
     public float dashCooldown = 1f;
     public int maxJumps = 2; // Número máximo de saltos permitidos (doble salto)
-    public Transform groundCheck;
-    public LayerMask groundLayer;
-    public LayerMask obstacleLayer;
+   
+    
     public GameObject menu;
     public GameObject Player;
     private Rigidbody2D rb;
-    private bool isGrounded;
+    
     private bool isFacingRight = true;
     public float groundCheckRadius = 0.2f;
     private float lastDashTime;
-    private int jumpCount; // Contador de saltos
+
+    public Transform groundCheck;
+    public LayerMask groundLayer;
+    private bool isGrounded;
+    private float jumpCount; // Contador de saltos
+    public float jumpForce = 10f;
+    public float jumpMultiplier;
+    public float fallMultiplier;
+    public float jumptime;
+    public bool isJumping = false;
+    public LayerMask obstacleLayer;
+    Vector2 VecGravity;
     public Vector2 startPosition;
 
     void Start()
@@ -57,19 +67,39 @@ public class PlayerController : MonoBehaviour
     void HandleJump()
     {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
-
+        
         // Reiniciar el contador de saltos cuando el jugador está en el suelo
         if (isGrounded)
         {
             jumpCount = 0;
         }
-
+        
         // Comprobar si se ha presionado la tecla de salto y si aún quedan saltos disponibles
         if (Input.GetKeyDown(KeyCode.Space) && (isGrounded || jumpCount < maxJumps))
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             jumpCount++; // Incrementar el contador de saltos
         }
+        //if (Input.GetButtonDown("Jump") && isGrounded)
+        //{
+        //   rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+        //   isJumping = true;
+        //   jumpCount = 0;
+        //}
+        //if(rb.velocity.y>0 && isJumping)
+        //{
+        //    jumpCount += Time.deltaTime;
+        //    if(jumpCount > jumptime) isJumping = false;
+        //    rb.velocity += VecGravity * jumpMultiplier * Time.deltaTime;
+        //}
+        //if (Input.GetButtonUp("Jump"))
+        //{
+        //    isJumping = false;
+        //}
+        //if(rb.velocity.y < 0)
+        //{
+        //    rb.velocity -= VecGravity * fallMultiplier * Time.deltaTime;
+        //}
     }
 
     // Función para manejar el dash
