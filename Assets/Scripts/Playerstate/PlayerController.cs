@@ -1,37 +1,46 @@
 using Unity.VisualScripting;
 using UnityEngine;
 using TMPro;
+using UnityEngine.XR;
 
 public class PlayerController : MonoBehaviour
 {
-    public Animator animator;
-    public float speed = 5f;
-    
+    public Vector2 startPosition;
+    public Vector2 vecGravity;
+
+    [SerializeField] float speed = 5f;
+
+    [Header("JumpSystem")]    
+    [SerializeField] float jumpTime;
+    [SerializeField] float jumpPower;
+    [SerializeField] float fallMultiplier;
+    [SerializeField] float jumpMultiplier;
+
+    public int maxJumps = 2;
+    public bool isJumping;
+    public float jumpCounter;
+    public bool isGrounded;
+    public Transform groundCheck;
+    public float groundCheckRadius = 0.3f;
+    public LayerMask groundLayer;
+
+    [Header("DashSystem")]
     public float dashDistance = 5f;
     public float dashCooldown = 1f;
-    public int maxJumps = 2; // Número máximo de saltos permitidos (doble salto)
-   
+        
     
+    public LayerMask obstacleLayer;
+
     public GameObject menu;
     public GameObject Player;
     private Rigidbody2D rb;
+    public Animator animator;
     
     private bool isFacingRight = true;
-    public float groundCheckRadius = 0.2f;
-    private float lastDashTime;
 
-    public Transform groundCheck;
-    public LayerMask groundLayer;
-    private bool isGrounded;
-    private float jumpCount; // Contador de saltos
-    public float jumpForce = 10f;
-    public float jumpMultiplier;
-    public float fallMultiplier;
-    public float jumptime;
-    public bool isJumping = false;
-    public LayerMask obstacleLayer;
-    Vector2 VecGravity;
-    public Vector2 startPosition;
+    private float lastDashTime;
+    
+    
 
     void Start()
     {
@@ -50,81 +59,69 @@ public class PlayerController : MonoBehaviour
         
     }
 
-    // Función para manejar el movimiento y el flip del jugador
+    // Funciï¿½n para manejar el movimiento y el flip del jugador
     void HandleMovement()
     {
         float moveInput = Input.GetAxis("Horizontal");
         rb.velocity = new Vector2(moveInput * speed, rb.velocity.y);
 
-        // Cambia la dirección del sprite si es necesario
+        // Cambia la direcciï¿½n del sprite si es necesario
         if ((moveInput > 0 && !isFacingRight) || (moveInput < 0 && isFacingRight))
         {
             Flip();
         }
     }
 
-    // Función para manejar el salto y el doble salto
+    // Funciï¿½n para manejar el salto y el doble salto
     void HandleJump()
     {
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
-        
-        // Reiniciar el contador de saltos cuando el jugador está en el suelo
-        if (isGrounded)
-        {
-            jumpCount = 0;
-        }
-        
-        // Comprobar si se ha presionado la tecla de salto y si aún quedan saltos disponibles
-        if (Input.GetKeyDown(KeyCode.Space) && (isGrounded || jumpCount < maxJumps))
-        {
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-            jumpCount++; // Incrementar el contador de saltos
-        }
-        //if (Input.GetButtonDown("Jump") && isGrounded)
-        //{
-        //   rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-        //   isJumping = true;
-        //   jumpCount = 0;
-        //}
-        //if(rb.velocity.y>0 && isJumping)
-        //{
-        //    jumpCount += Time.deltaTime;
-        //    if(jumpCount > jumptime) isJumping = false;
-        //    rb.velocity += VecGravity * jumpMultiplier * Time.deltaTime;
-        //}
-        //if (Input.GetButtonUp("Jump"))
-        //{
-        //    isJumping = false;
-        //}
-        //if(rb.velocity.y < 0)
-        //{
-        //    rb.velocity -= VecGravity * fallMultiplier * Time.deltaTime;
-        //}
-    }
+        isGrounded = Physics2D.OverlapCapsule(groundCheck.position, new Vector2(1.8f, 0.3f ), CapsuleDirection2D.Horizontal, 0, groundLayer);
 
-    // Función para manejar el dash
-    void HandleDash()
+        if (Input.GetButtonDown("Jump") && isGrounded)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, jumpPower);
+            isJumping = true;
+            jumpCounter = 0;                       
+        }
+        if (rb.velocity.y > 0 && isJumping)
+        {
+            jumpCounter += Time.deltaTime;
+            if (jumpCounter > jumpTime) isJumping = false;
+
+            rb.velocity += vecGravity * jumpMultiplier * Time.deltaTime;
+        }
+        if (Input.GetButtonUp("Jump"))
+        {
+            isJumping = false;
+        }
+        if(rb.velocity.y < 0)
+        {
+            rb.velocity -= vecGravity * fallMultiplier * Time.deltaTime;
+        }
+    }
+        // Funciï¿½n para manejar el dash
+        void HandleDash()
     {
         if (Input.GetKeyDown(KeyCode.LeftShift) && Time.time > lastDashTime + dashCooldown)
         {
             Vector2 dashDirection = isFacingRight ? Vector2.right : Vector2.left;
 
-            // Comprobación de colisión en la dirección del dash
+            // Comprobaciï¿½n de colisiï¿½n en la direcciï¿½n del dash
             RaycastHit2D hit = Physics2D.Raycast(transform.position, dashDirection, dashDistance, obstacleLayer);
             float dashRange = hit.collider != null ? hit.distance : dashDistance;
 
-            // Realizar el dash solo hasta el obstáculo o la distancia máxima
+            // Realizar el dash solo hasta el obstï¿½culo o la distancia mï¿½xima
             rb.MovePosition(rb.position + dashDirection * dashRange);
             lastDashTime = Time.time;
         }
     }
 
-    // Función para abrir el menú
+    // Funciï¿½n para abrir el menï¿½
     void HandleMenu()
     {
         if (Input.GetKeyDown(KeyCode.Escape) && menu != null)
         {
-            // Si el menú está activo, desactívalo
+            // Si el menï¿½ estï¿½ activo, desactï¿½valo
             if (menu.activeSelf)
             {
                 menu.SetActive(false);
@@ -139,7 +136,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // Función para voltear el sprite del jugador según la dirección del movimiento
+    // Funciï¿½n para voltear el sprite del jugador segï¿½n la direcciï¿½n del movimiento
     void Flip()
     {
         isFacingRight = !isFacingRight;
@@ -166,9 +163,9 @@ public class PlayerController : MonoBehaviour
         // Verificamos si el objeto con el que chocamos tiene el tag "Pinchos"
         if (collision.gameObject.CompareTag("Pinchos"))
         {
-            // Si es así, volvemos a la posición inicial
+            // Si es asï¿½, volvemos a la posiciï¿½n inicial
             transform.position = startPosition;
-            Debug.Log("Jugador colisionó con Pinchos y volvió a la posición inicial.");
+            Debug.Log("Jugador colisionï¿½ con Pinchos y volviï¿½ a la posiciï¿½n inicial.");
         }
     }
 
