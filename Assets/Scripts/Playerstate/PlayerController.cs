@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviour
     void HandleJump()
     {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
-
+        //test
         // Reiniciar el contador de saltos cuando el jugador está en el suelo
         if (isGrounded)
         {
