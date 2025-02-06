@@ -5,17 +5,23 @@ using TMPro;
 public class PlayerController : MonoBehaviour
 {
     public Animator animator;
-    public float speed = 5f;
-    public float jumpForce = 10f;
-    public float dashDistance = 5f;
-    public float dashCooldown = 1f;
-    public int maxJumps = 2; // Número máximo de saltos permitidos (doble salto)
-    public Transform groundCheck;
-    public LayerMask groundLayer;
-    public LayerMask obstacleLayer;
     public GameObject menu;
     public GameObject Player;
     private Rigidbody2D rb;
+
+    public float speed = 5f;
+
+    public float jumpForce = 10f;
+    public int maxJumps = 2; // Número máximo de saltos permitidos (doble salto)
+
+    public float dashDistance = 5f;
+    public float dashCooldown = 1f;
+
+    
+    public Transform groundCheck;
+    public LayerMask groundLayer;
+    public LayerMask obstacleLayer;
+    
     private bool isGrounded;
     private bool isFacingRight = true;
     public float groundCheckRadius = 0.2f;
@@ -57,7 +63,6 @@ public class PlayerController : MonoBehaviour
     void HandleJump()
     {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
-        //test
         // Reiniciar el contador de saltos cuando el jugador está en el suelo
         if (isGrounded)
         {
