@@ -9,29 +9,37 @@ public class PlayerController : MonoBehaviour
     public GameObject Player;
     private Rigidbody2D rb;
 
-    public float speed = 5f;
+    public Vector2 startPosition;
 
-    public float jumpForce = 10f;
-    public int maxJumps = 2; // Número máximo de saltos permitidos (doble salto)
+    public float speed = 15f;
+
+    [SerializeField] float jumpTime;
+    [SerializeField] int jumpPower;
+    [SerializeField] float fallMultiplier;
+    [SerializeField] float jumpMultiplier;
+
+    public bool isJumping;
+    public float jumpCounter; // Contador de saltos
+    public Vector2 vecGravity;
+
+    public Transform groundCheck;
+    private float groundCheckRadius = 0.2f;
+    private LayerMask groundLayer;
+
+    public LayerMask obstacleLayer;
 
     public float dashDistance = 5f;
     public float dashCooldown = 1f;
-
-    
-    public Transform groundCheck;
-    public LayerMask groundLayer;
-    public LayerMask obstacleLayer;
-    
-    private bool isGrounded;
-    private bool isFacingRight = true;
-    public float groundCheckRadius = 0.2f;
     private float lastDashTime;
-    private int jumpCount; // Contador de saltos
-    public Vector2 startPosition;
+
+    private bool isFacingRight = true;
+
+
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        vecGravity = new Vector2(0, Physics2D.gravity.y);
         startPosition = transform.position;
         Player.SetActive(false);
         menu.SetActive(true);
@@ -43,7 +51,7 @@ public class PlayerController : MonoBehaviour
         HandleJump();
         HandleDash();
         HandleMenu();
-        
+
     }
 
     // Función para manejar el movimiento y el flip del jugador
@@ -62,21 +70,53 @@ public class PlayerController : MonoBehaviour
     // Función para manejar el salto y el doble salto
     void HandleJump()
     {
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
-        // Reiniciar el contador de saltos cuando el jugador está en el suelo
-        if (isGrounded)
+        if (Input.GetButtonDown("Jump") && isGrounded())
         {
-            jumpCount = 0;
+            rb.velocity = new Vector2(rb.velocity.x, jumpPower);
+            isJumping = true;
+            jumpCounter = 0;
+        }
+        if (rb.velocity.y> 0 && isJumping)
+        {
+            jumpCounter += Time.deltaTime;
+            if (jumpCounter > jumpTime) isJumping = false;
+
+            float t = jumpCounter / jumpTime;
+            float currentJumpM = jumpMultiplier;
+
+            if (t > 0.5f)
+            {
+                currentJumpM = jumpMultiplier * (1 - t);
+            }
+
+            rb.velocity += vecGravity * currentJumpM * Time.deltaTime;
         }
 
-        // Comprobar si se ha presionado la tecla de salto y si aún quedan saltos disponibles
-        if (Input.GetKeyDown(KeyCode.Space) && (isGrounded || jumpCount < maxJumps))
+        if (Input.GetButtonUp("Jump"))
         {
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-            jumpCount++; // Incrementar el contador de saltos
+            isJumping = false;
+            jumpCounter = 0;
+
+            if (rb.velocity.y > 0)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.6f);
+            }
+
         }
+
+        if (rb.velocity.y < 0)
+        {
+            
+        }
+
+
     }
-
+    bool isGrounded()
+    {
+        return Physics2D.OverlapCapsule(groundCheck.position, new Vector2(1.8f, 0.3f), CapsuleDirection2D.Horizontal, 0, groundLayer);
+        Debug.Log("En el suelo");
+    }
+    
     // Función para manejar el dash
     void HandleDash()
     {
@@ -107,7 +147,7 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                
+
                 menu.SetActive(true);
                 Player.SetActive(false);
             }
@@ -146,5 +186,4 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Jugador colisionó con Pinchos y volvió a la posición inicial.");
         }
     }
-
 }
