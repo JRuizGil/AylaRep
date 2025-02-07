@@ -3,13 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - Ground
-  - platform
-  - Demolition
-  - Bola
-  - Bullet
-  - Pinchos
+  tags: []
   layers:
   - Default
   - TransparentFX
@@ -44,12 +38,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 2424153585
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Tronco
-    uniqueID: 1315535579
-    locked: 0
-  - name: Bullet
-    uniqueID: 1982119017
+  - name: Foreground
+    uniqueID: 3928980359
     locked: 0
