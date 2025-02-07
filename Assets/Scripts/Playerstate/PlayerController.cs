@@ -21,16 +21,19 @@ public class PlayerController : MonoBehaviour
     public bool isJumping;
     public float jumpCounter; // Contador de saltos
     public Vector2 vecGravity;
+    public bool doubleJump;
+    private float doubleJumpingPower = 12f;
 
     public Transform groundCheck;
-    private float groundCheckRadius = 0.2f;
-    private LayerMask groundLayer;
+    private float groundCheckRadius = 0.3f;
+    public LayerMask groundLayer;
 
     public LayerMask obstacleLayer;
 
     public float dashDistance = 5f;
     public float dashCooldown = 1f;
     private float lastDashTime;
+
 
     private bool isFacingRight = true;
 
@@ -51,7 +54,6 @@ public class PlayerController : MonoBehaviour
         HandleJump();
         HandleDash();
         HandleMenu();
-
     }
 
     // Función para manejar el movimiento y el flip del jugador
@@ -70,11 +72,24 @@ public class PlayerController : MonoBehaviour
     // Función para manejar el salto y el doble salto
     void HandleJump()
     {
+        if(isGrounded() && Input.GetButton("Jump"))
+        {
+            doubleJump = false;
+        }
+        if (Input.GetButtonDown("Jump"))
+        {
+            if (isGrounded() || doubleJump)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, jumpPower);
+                doubleJump = !doubleJump;
+            }
+        }
         if (Input.GetButtonDown("Jump") && isGrounded())
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpPower);
             isJumping = true;
             jumpCounter = 0;
+            doubleJump = !doubleJump;
         }
         if (rb.velocity.y> 0 && isJumping)
         {
@@ -103,18 +118,16 @@ public class PlayerController : MonoBehaviour
             }
 
         }
-
-        if (rb.velocity.y < 0)
+        if(rb.velocity.y < 0)
         {
-            
+            rb.velocity -= vecGravity * fallMultiplier * Time.deltaTime;
         }
-
-
+        
     }
     bool isGrounded()
     {
         return Physics2D.OverlapCapsule(groundCheck.position, new Vector2(1.8f, 0.3f), CapsuleDirection2D.Horizontal, 0, groundLayer);
-        Debug.Log("En el suelo");
+        
     }
     
     // Función para manejar el dash
