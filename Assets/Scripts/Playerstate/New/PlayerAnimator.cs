@@ -24,13 +24,14 @@ public class PlayerAnimator : MonoBehaviour
     public bool justLanded { private get; set; }
 
     public float currentVelY;
+    public float currentVelX;
 
     private void Start()
     {
         mov = GetComponent<PlayerMovement>();
         spriteRend = GetComponentInChildren<SpriteRenderer>();
         anim = spriteRend.GetComponent<Animator>();
-
+        anim = GetComponent<Animator>();
         demoManager = FindObjectOfType<DemoManager>();
 
         _jumpParticle = jumpFX.GetComponent<ParticleSystem>();
@@ -86,7 +87,8 @@ public class PlayerAnimator : MonoBehaviour
             justLanded = false;
             return;
         }
-
         anim.SetFloat("Vel Y", mov.RB.velocity.y);
+        anim.SetFloat("Vel X", mov.RB.velocity.x);
+        anim.SetFloat("Vel -X", mov.RB.velocity.x);
     }
 }
