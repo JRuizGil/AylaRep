@@ -87,8 +87,10 @@ public class PlayerAnimator : MonoBehaviour
             justLanded = false;
             return;
         }
-        anim.SetFloat("Vel Y", mov.RB.velocity.y);
-        anim.SetFloat("Vel X", mov.RB.velocity.x);
-        anim.SetFloat("Vel -X", mov.RB.velocity.x);
+
+        anim.SetFloat("Vel Y",mov.RB.velocity.y);
+
+        anim.SetFloat("Vel X", Mathf.Abs(mov.RB.velocity.x));
+
     }
 }
