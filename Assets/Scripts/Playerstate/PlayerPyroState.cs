@@ -25,6 +25,7 @@ public class PlayerPyroState : PlayerBaseState
     {
         
         PyroHab();
+
         if (Palo && Puente== false)
         {
             Puente = true;
@@ -34,33 +35,17 @@ public class PlayerPyroState : PlayerBaseState
     }
     public void PyroHab()
     {
-        if (Input.GetMouseButtonDown(0)) // Clic izquierdo del ratón
-        {
-            if (firePoint == null || bulletPrefab == null)
-            {
-                Debug.LogError("No se puede disparar: firePoint o bulletPrefab no está asignado.");
-                return;
-            }
+        if (!Input.GetMouseButtonDown(0) || firePoint == null || bulletPrefab == null) return;
 
-            // Determina la dirección del disparo según la escala del jugador
-            float direction = Mathf.Sign(Player.transform.localScale.x); // 1 para derecha, -1 para izquierda
+        float direction = Mathf.Sign(Player.transform.localScale.x); // 1 para derecha, -1 para izquierda
+        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
 
-            // Instancia la bala
-            GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
+        bullet.GetComponent<Rigidbody2D>().velocity = Vector2.right * direction * bulletSpeed;
+        bullet.transform.localScale = new Vector3(direction, 1, 1); // Ajusta la dirección visual
 
-            // Aplica movimiento a la bala
-            Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-            if (rb != null)
-            {
-                rb.velocity = new Vector2(direction * bulletSpeed, 0); // Disparo horizontal
-            }
-
-            // Ajusta la rotación de la bala para que apunte hacia la dirección correcta
-            bullet.transform.localScale = new Vector3(direction * Mathf.Abs(bullet.transform.localScale.x), bullet.transform.localScale.y, bullet.transform.localScale.z);
-
-            Debug.Log("¡Disparo realizado en dirección: " + (direction > 0 ? "derecha" : "izquierda") + "!");
-        }
+        Debug.Log($"Disparo en dirección: {(direction > 0 ? "derecha" : "izquierda")}");
     }
+
     public void EarnAbility()
     {
         if (!Paloobj.activeSelf)

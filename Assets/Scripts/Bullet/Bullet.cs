@@ -11,10 +11,13 @@ public class Bullet : MonoBehaviour
         Destroy(gameObject, lifeTime); // Destruye la bala después de cierto tiempo
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Bala impactó con: " + collision.name);
-
-        Destroy(gameObject);
+        if (collision.CompareTag("Liana")) // Verifica si el objeto tiene el tag "Liana"
+        {
+            Destroy(collision.gameObject); // Destruye la liana
+            Destroy(gameObject); // Destruye la bala
+            Debug.Log("Bala impactó con: " + collision.gameObject.name);
+        }
     }
 }

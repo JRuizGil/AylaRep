@@ -6,6 +6,7 @@ public class ObtainHability : MonoBehaviour
 {
     public bool isInsideTrigger;
     public GameObject Bola;
+
     // Start is called before the first frame update
     void Start()
     {
