@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Liana : MonoBehaviour
+public class Puerta3 : MonoBehaviour
 {
     private int antorchasEncendidas = 0;
     public GameObject objetoParaDesactivar;  // Arrastra aquí el GameObject que quieres desactivar
@@ -23,7 +23,7 @@ public class Liana : MonoBehaviour
         Debug.Log("Antorchas encendidas: " + antorchasEncendidas);
 
         // Si se han encendido 2 antorchas, desactiva el GameObject
-        if (antorchasEncendidas >= 2)
+        if (antorchasEncendidas >= 12)
         {
             if (objetoParaDesactivar != null)
             {
