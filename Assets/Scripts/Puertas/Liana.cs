@@ -1,65 +1,35 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Liana : Bullet
+public class Liana : MonoBehaviour
 {
-    private int contadorParticulas = 0;
-    public int limiteParticulas = 2;
-
-    // Lista para almacenar las partículas específicas
-    private List<ParticleSystem> particulasObjetivo = new List<ParticleSystem>();
-
-    private void Start()
-    {
-        // Busca y registra las partículas específicas ya instanciadas
-        GameObject[] antorchas = GameObject.FindGameObjectsWithTag("Antorcha");
-        foreach (GameObject antorcha in antorchas)
-        {
-            ParticleSystem particula = antorcha.GetComponent<ParticleSystem>();
-
-            if (particula != null && !particula.isPlaying)
-            {
-                // Solo añade partículas instanciadas pero no activadas
-                particulasObjetivo.Add(particula);
-            }
-        }
-
-        Debug.Log("Partículas específicas registradas: " + particulasObjetivo.Count);
-    }
+    private int antorchasEncendidas = 0;
+    public GameObject objetoParaDesactivar;  // Arrastra aquí el GameObject que quieres desactivar
 
     private void OnEnable()
     {
-        // Suscribirse al evento
-        Bullet.OnParticulaActivada += ContarParticulas;
+        Bullet.AntorchaEncendida += OnAntorchaEncendida;
     }
 
     private void OnDisable()
     {
-        // Desuscribirse del evento
-        Bullet.OnParticulaActivada -= ContarParticulas;
+        Bullet.AntorchaEncendida -= OnAntorchaEncendida;
     }
 
-    private void ContarParticulas()
+    private void OnAntorchaEncendida()
     {
-        // Verifica solo las partículas específicas registradas
-        foreach (ParticleSystem particula in particulasObjetivo)
+        antorchasEncendidas++;
+        Debug.Log("Antorchas encendidas: " + antorchasEncendidas);
+
+        // Si se han encendido 2 antorchas, desactiva el GameObject
+        if (antorchasEncendidas >= 2)
         {
-            if (particula.isPlaying)
+            if (objetoParaDesactivar != null)
             {
-                contadorParticulas++;
-                Debug.Log("Partículas específicas activadas: " + contadorParticulas);
-
-                // Elimina la partícula activada de la lista para no contarla de nuevo
-                particulasObjetivo.Remove(particula);
-                break; // Sal de la iteración después de contar una
+                objetoParaDesactivar.SetActive(false);
+                Debug.Log("Objeto desactivado.");
             }
-        }
-
-        // Destruye el objeto si se alcanzó el límite
-        if (contadorParticulas >= limiteParticulas)
-        {
-            Destroy(gameObject);
-            Debug.Log("¡Objeto destruido por activación de partículas específicas!");
         }
     }
 }
