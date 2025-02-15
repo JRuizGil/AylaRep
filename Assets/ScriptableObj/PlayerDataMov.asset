@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: de91cdb817e36a24cba54b4ee63e68e9, type: 3}
-  m_Name: Celeste Style
+  m_Name: PlayerDataMov
   m_EditorClassIdentifier: 
   gravityStrength: -64
   gravityScale: 6.523955
