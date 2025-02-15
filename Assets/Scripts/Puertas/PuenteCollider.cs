@@ -5,12 +5,15 @@ using UnityEngine;
 public class PuenteCollider : MonoBehaviour
 {
     [Header("GameObjects to Deactivate")]
-    public GameObject gameObject1; // Primer GameObject a desactivar
-    public GameObject gameObject2; // Segundo GameObject a desactivar
+    public GameObject gameObject1; 
+    public GameObject gameObject2; 
+    public GameObject gameObject3;
     // Start is called before the first frame update
     void Start()
     {
-        
+        gameObject1.SetActive(true);
+        gameObject2.SetActive(true);
+        gameObject3.SetActive(false);
     }
 
     // Update is called once per frame
@@ -20,22 +23,23 @@ public class PuenteCollider : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // Verifica si el objeto que entró tiene el tag "Demolition"
+        
         if (other.CompareTag("Demolition"))
         {
-            // Desactiva los GameObjects asignados
+            
             if (gameObject1 != null)
             {
                 gameObject1.SetActive(false);
             }
-
             if (gameObject2 != null)
             {
                 gameObject2.SetActive(false);
             }
-
-            // Opcional: Mensaje en la consola
-            Debug.Log("GameObjects desactivados porque un objeto con el tag 'Demolition' entró en el trigger.");
+            if (gameObject3 != null)
+            {
+                gameObject3.SetActive(true);
+            }
+            
         }
     }
 }
