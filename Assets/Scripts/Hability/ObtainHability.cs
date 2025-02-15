@@ -27,6 +27,5 @@ public class ObtainHability : MonoBehaviour
         {
             isInsideTrigger = true;
         }
-
     }    
 }

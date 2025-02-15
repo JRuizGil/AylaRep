@@ -27,10 +27,10 @@ public class Bullet : MonoBehaviour
             Animator animator = collision.gameObject.GetComponent<Animator>();
             if (animator != null)
             {
-                animator.SetTrigger("Encender");
-                // Disparar el evento cuando se enciende una antorcha
-                AntorchaEncendida?.Invoke();
+                animator.SetTrigger("Encender");                
+                AntorchaEncendida.Invoke();
             }
         }
     }
+    
 }
