@@ -31,7 +31,7 @@ public class MenuController : MonoBehaviour
     public void ResumeGame()
     {
         Menu.SetActive(false);
-        Player.SetActive(true);
+        Player.SetActive(false);
         MenuPause.SetActive(false);
     }
     public void OptionsGame()
