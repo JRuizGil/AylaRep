@@ -25,6 +25,7 @@ public class Bullet : MonoBehaviour
         if (collision.gameObject.CompareTag("Antorcha"))
         {
             Animator animator = collision.gameObject.GetComponent<Animator>();
+            Destroy(collision);
             if (animator != null)
             {
                 animator.SetTrigger("Encender");                
