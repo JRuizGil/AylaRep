@@ -10,7 +10,7 @@ public class DemoManager : MonoBehaviour
     //[SerializeField] private Tilemap[] levels;
     //[SerializeField] private Transform spawnPoint;
 
-    [SerializeField] private TextMeshProUGUI nameText;
+    //[SerializeField] private TextMeshProUGUI nameText;
 
     private int _currentPlayerTypeIndex;
     private int _currentTilemapIndex;

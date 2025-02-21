@@ -14,6 +14,8 @@ public class MenuController : MonoBehaviour
     private bool _MenuPrincipal;
     private bool _isOnMenuAjustes;
 
+    public AudioSource audioSource;
+
 
     // Método para salir del juego
     void Start()
@@ -28,6 +30,7 @@ public class MenuController : MonoBehaviour
     }
     void Update()
     {
+        Audio();
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (_isPaused)
@@ -45,8 +48,11 @@ public class MenuController : MonoBehaviour
             {
                 PauseGame();
             }
-        }        
-               
+        }
+        if (_isPaused)
+        {
+
+        }       
     }
 
     public void PauseGame()
@@ -54,6 +60,7 @@ public class MenuController : MonoBehaviour
         _isPaused = true;
         MenuPause.SetActive(true);
         Time.timeScale = 0f;
+        Player.SetActive(false);
     }
     public void ResumeGame()
     {
@@ -63,7 +70,6 @@ public class MenuController : MonoBehaviour
         Opciones.SetActive(false);
 
         _isPaused = false;
-
         Time.timeScale = 1f;
          
     }
@@ -115,5 +121,26 @@ public class MenuController : MonoBehaviour
         }
 
 
+    }
+    public void Audio()
+    {
+        if (_isPaused)
+        {
+            if (!audioSource.isPlaying)
+            {
+                audioSource.Play(); 
+            }
+        }
+        else
+        {
+            if (audioSource.isPlaying)
+            {
+                audioSource.Pause(); 
+            }
+        }
+    }
+    public void SetPauseState(bool isPaused)
+    {
+        _isPaused = isPaused;
     }
 }

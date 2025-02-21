@@ -1,11 +1,3 @@
-/*
-	Created by @DawnosaurDev at youtube.com/c/DawnosaurStudios
-	Thanks so much for checking this out and I hope you find it helpful! 
-	If you have any further queries, questions or feedback feel free to reach out on my twitter or leave a comment on youtube :D
-
-	Feel free to use this in your own games, and I'd love to see anything you make!
- */
-
 using System.Collections;
 using UnityEngine;
 
@@ -411,15 +403,12 @@ public class PlayerMovement : MonoBehaviour
 		*/
 	}
 
-	private void Turn()
-	{
-		//stores scale and flips the player along the x axis, 
-		Vector3 scale = transform.localScale; 
-		scale.x *= -1;
-		transform.localScale = scale;
+    private void Turn()
+    {
+        transform.rotation = Quaternion.Euler(0, IsFacingRight ? 180 : 0, 0);
+        IsFacingRight = !IsFacingRight;
+    }
 
-		IsFacingRight = !IsFacingRight;
-	}
     #endregion
 
     #region JUMP METHODS
@@ -601,5 +590,3 @@ public class PlayerMovement : MonoBehaviour
 	}
     #endregion
 }
-
-// created by Dawnosaur :D
